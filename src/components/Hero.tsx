@@ -56,7 +56,7 @@ const Hero = () => {
               Event Experiences
             </span>
           </h1>
-          <p className="text-lg md:text-xl text-gray-300 mt-4">
+          <p className="text-lg md:text-xl text-gray-300 my-10">
             Host your next event in elegance. From weddings to corporate events,
             we create stunning experiences tailored for you.
           </p>
