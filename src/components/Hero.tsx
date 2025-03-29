@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const bgImages = [
-  "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+  "https://images.unsplash.com/photo-1527529482837-4698179dc6ce?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "https://images.unsplash.com/photo-1569930784237-ea65a2f40a83?q=80&w=2024&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
   "https://images.unsplash.com/photo-1638132704795-6bb223151bf7?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
 ];
@@ -17,6 +17,17 @@ const Hero = () => {
     const interval = setInterval(nextSlide, 8000);
     return () => clearInterval(interval);
   }, []);
+
+  const handleSmoothScroll = (anchor: string) => {
+    const element = document.getElementById(anchor);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+        inline: "nearest",
+      });
+    }
+  };
 
   return (
     <section
@@ -61,20 +72,31 @@ const Hero = () => {
             we create stunning experiences tailored for you.
           </p>
           <div className="flex flex-col md:flex-row gap-4 justify-center mt-6">
-            <motion.button
+            <motion.a
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
+              href="#packages"
               className="bg-white text-black px-8 py-3 rounded-full text-lg font-semibold shadow-md transition-transform"
+              onClick={(e) => {
+                e.preventDefault(); // Prevent default anchor behavior
+                handleSmoothScroll("packages"); // Match element ID
+              }}
             >
               Book an Event
-            </motion.button>
-            <motion.button
+            </motion.a>
+
+            <motion.a
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
+              href="#contactus"
               className="border-2 border-white text-white px-8 py-3 rounded-full text-lg font-semibold shadow-md transition-transform"
+              onClick={(e) => {
+                e.preventDefault();
+                handleSmoothScroll("contactus");
+              }}
             >
               Contact Us
-            </motion.button>
+            </motion.a>
           </div>
         </motion.div>
       </div>
